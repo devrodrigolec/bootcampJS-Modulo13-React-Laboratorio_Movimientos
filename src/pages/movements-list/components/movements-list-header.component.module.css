@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding-bottom: 0px;
+  border-bottom: 10px solid var(--secondary_color);
+  margin-bottom: 10px;
+}
+
+.header > h1 {
+  font-size: 2.2rem;
+  font-weight: 300;
+}
+
+.saldo-disponible {
+  font-size: 12px;
+  font-weight: 600;
+}
+.balance {
+  color: var(--primary_color);
+  font-weight: 600;
+  font-size: 28px;
+  text-align: right;
+}

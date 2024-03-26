@@ -1,27 +1,39 @@
 import { AppLayout } from "@/layout";
 import React from "react";
-import { MovementListHeaderComponent } from "./components";
-import { mockMovimientos } from "./mockMovimientos";
-import { mapApiModelToViewModelMovementList } from './movement-list.mapper';
-import { ViewModelMovementList } from "./movement-list.vm";
+import {
+  AccountDataComponent,
+  MovementListHeaderComponent,
+  MovementListTableComponent,
+} from "./components";
 
+import {
+  ViewModelMovementList,
+  createEmptyMovementsList,
+} from "./movement-list.vm";
+import classes from "./movements-list.module.css";
+import { useAccountContext } from "@/core/account/account.context";
+import { getMovementListFromApi } from "./api";
+import { mapApiModelToViewModelMovementList } from "./movement-list.mapper";
 
 export const MovementListPage: React.FC = () => {
+  const [movements, setMovements] = React.useState<ViewModelMovementList[]>(
+    createEmptyMovementsList()
+  );
+  const { account } = useAccountContext();
 
-  const movementsList = mapApiModelToViewModelMovementList(mockMovimientos);
-
-  const findLastMovementByDate = (movementsList : ViewModelMovementList[]) => {
-    const movementsSortedByDate = movementsList.toSorted((a : ViewModelMovementList,b: ViewModelMovementList) => a.transaction.getTime() - b.transaction.getTime())
-    return movementsSortedByDate[0];
-  }
-
-  const lastMovement = findLastMovementByDate(movementsList);
-
-  console.log(lastMovement.balance)
+  React.useEffect(() => {
+    getMovementListFromApi(account.id).then((resp) =>
+      setMovements(mapApiModelToViewModelMovementList(resp))
+    );
+  }, []);
 
   return (
     <AppLayout>
-      <MovementListHeaderComponent balance ={'hola'}/>
+      <div className={classes.root}>
+        <MovementListHeaderComponent />
+        <AccountDataComponent />
+        <MovementListTableComponent movementsList={movements} />
+      </div>
     </AppLayout>
   );
 };

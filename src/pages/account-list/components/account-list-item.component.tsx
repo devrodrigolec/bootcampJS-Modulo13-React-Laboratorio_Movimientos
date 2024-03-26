@@ -3,6 +3,7 @@ import { AccountVm } from "../account-list.vm";
 import classes from "./account-list-item.component.module.css";
 import { Link, generatePath, useNavigate } from "react-router-dom";
 import { appRoutes } from "@/core/router";
+import { useAccountContext } from "@/core/account/account.context";
 
 interface Props {
   accountItem: AccountVm;
@@ -14,9 +15,10 @@ const ACTION_MOVEMENTS = "2";
 
 export const AccountListItemComponent: React.FC<Props> = (props) => {
   const { accountItem } = props;
+  const { setAccount} = useAccountContext();
   const navigate = useNavigate();
 
-  const handleSelectedOptioChange = (
+  const handleSelectedOptionChange = (
     e: React.ChangeEvent<HTMLSelectElement>
   ) => {
     switch (e.target.value) {
@@ -26,6 +28,7 @@ export const AccountListItemComponent: React.FC<Props> = (props) => {
         );
         break;
       case ACTION_MOVEMENTS:
+        setAccount(accountItem);
         navigate(generatePath(appRoutes.movements, { id: accountItem.id }));
         break;
     }
@@ -40,13 +43,16 @@ export const AccountListItemComponent: React.FC<Props> = (props) => {
       </span>
       <span className={classes.dataCell}>{accountItem.name}</span>
       <span className={`${classes.dataCell} ${classes.alignRight}`}>
-        {accountItem.balance}
+        {accountItem.balance} €
       </span>
       <span className={`${classes.dataCell} ${classes.alignRight}`}>
         {accountItem.lastTransaction.toLocaleDateString()}
       </span>
       <span className={`${classes.dataCell} ${classes.selectContainer}`}>
-        <select className={classes.select} onChange={handleSelectedOptioChange}>
+        <select
+          className={classes.select}
+          onChange={handleSelectedOptionChange}
+        >
           <option value={ACTION_NONE}>Seleccionar</option>
           <option value={ACTION_TRANSFER}>Transferir</option>
           <option value={ACTION_MOVEMENTS}>Movimientos</option>
