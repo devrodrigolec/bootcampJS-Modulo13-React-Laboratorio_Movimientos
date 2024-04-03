@@ -12,4 +12,5 @@ export const appRoutes = {
   movements: `${routesPrefixes.movements}/:id`,
   transfer: routesPrefixes.transfer,
   transferFromAccount: `${routesPrefixes.transfer}/:id`,
+  createAccount: `/create-account`
 };
