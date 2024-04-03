@@ -5,8 +5,11 @@ import {
   createEmptyAccount,
   createEmptyAccountError,
 } from "../create-account.vm";
-import { validateCreateAccountForm } from "../validations/create-account-form.validation";
+import { validateCreateAccountForm } from "../validations";
 import classes from "./create-account-form.module.css";
+import { postNewAccountApi } from "../api";
+import { useNavigate } from "react-router-dom";
+import { appRoutes } from "@/core/router";
 
 export const CreateAccountFormComponent: React.FC = () => {
   const [dataForm, setDataForm] = React.useState<Account>(createEmptyAccount);
@@ -14,6 +17,8 @@ export const CreateAccountFormComponent: React.FC = () => {
   const [errors, setErrors] = React.useState<AccountError>(
     createEmptyAccountError()
   );
+
+  const navigate = useNavigate();
 
   const handleChange = (
     e:
@@ -28,12 +33,12 @@ export const CreateAccountFormComponent: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     const errors = validateCreateAccountForm(dataForm);
     setErrors(errors.errors);
     if (errors.succeeded) {
-      console.log({ dataForm });
-      alert("Cuenta creada con éxito");
+      postNewAccountApi(dataForm).then((data) => console.log(data));
+      alert(`Cuenta creada con éxito`);
+      navigate(appRoutes.acoountList);
     }
   };
 
@@ -58,7 +63,7 @@ export const CreateAccountFormComponent: React.FC = () => {
           <span className={classes.error}>{errors.name}</span>
         </div>
       </div>
-        <button>GUARDAR</button>
+      <button>GUARDAR</button>
     </form>
   );
 };

@@ -30,7 +30,7 @@ div span {
 
 
 
-div select, div input {
+.form-container div select, .form-container div input {
   width: 250px;
 }
 
