@@ -108,5 +108,61 @@
       "accountId": "3"
     }
   ],
-  "transfer": []
+  "transfer": [
+    {
+      "accountId": "3",
+      "iban": "ES6000491500051234567892",
+      "name": "Paco",
+      "amount": "200",
+      "concept": "Compra del mes",
+      "notes": "Hola",
+      "transferDate": "Tue Apr 02 2024",
+      "realTransferDate": "",
+      "id": 1
+    },
+    {
+      "accountId": "3",
+      "iban": "ES6000491500051234567892",
+      "name": "Paco",
+      "amount": "200",
+      "concept": "Compra del mes",
+      "notes": "Hola",
+      "transferDate": "Tue Apr 02 2024",
+      "realTransferDate": "",
+      "id": 2
+    },
+    {
+      "accountId": "3",
+      "iban": "ES6000491500051234567892",
+      "name": "Paco",
+      "amount": "200",
+      "concept": "Compra del mes",
+      "notes": "Hola",
+      "transferDate": "Tue Apr 02 2024",
+      "realTransferDate": "",
+      "id": 3
+    },
+    {
+      "accountId": "3",
+      "iban": "ES6000491500051234567892",
+      "name": "Rodrigo",
+      "amount": "1000",
+      "concept": "Casa",
+      "notes": "",
+      "transferDate": "Tue Apr 02 2024",
+      "realTransferDate": "",
+      "id": 4
+    },
+    {
+      "accountId": "2",
+      "iban": "ES7921000813610123456789",
+      "name": "Rodrigo Leciñana",
+      "amount": "50",
+      "concept": "Compra del mes",
+      "notes": "Hola",
+      "transferDate": "Wed Apr 03 2024",
+      "realTransferDate": "",
+      "id": 5
+    }
+  ]
 }
